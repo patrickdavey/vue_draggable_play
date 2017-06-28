@@ -3,7 +3,7 @@
 import Vue from "vue";
 import App from "./App.vue";
 import store from "./store";
-import { normalizedData } from "./initial_state";
+import normalizedData from "./initial_state";
 import lodash from "lodash";
 
 Object.defineProperty(Vue.prototype, "_", { value: lodash });
@@ -15,6 +15,6 @@ new Vue({
   template: "<App/>",
   components: { App },
   created () {
-    store.commit("SET_INITIAL_DATA", { init_nodes: normalizedData.entities.nodes, rootId: normalizedData.result });
+    store.commit("SET_INITIAL_DATA", { initNodes: normalizedData.entities.nodes, rootId: normalizedData.result });
   }
 });

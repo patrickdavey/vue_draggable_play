@@ -1,6 +1,5 @@
 <template>
-  <draggable element="ul" v-on:click.native.self="clickHandler" :id="partId" class="tree" v-model="children" :options="{group:"people"}" :move="move"
-                          v-bind:class="classObject">
+  <draggable element="ul" v-on:click.native.self="clickHandler" :id="partId" class="tree" v-model="children" :options="{group:'people'}" :move="move" v-bind:class="classObject">
   <li class="branch" v-on:click.stop="childClick(child)" v-for="(child, index) in children">
     <template v-if="containsProblems">
       <document-problem :problem="child"/>

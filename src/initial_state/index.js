@@ -77,4 +77,4 @@ nodeSchema.define({ nodes });
 // partContainer.define({ partContainers });
 const normalizedData = normalize(originalData, nodeSchema);
 
-export { normalizedData };
+export default normalizedData;
