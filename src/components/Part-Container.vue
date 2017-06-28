@@ -16,6 +16,7 @@
 
 import draggable from "vuedraggable";
 import DocumentProblem from "./Document-Problem.vue";
+import MoveLogic from "../lib/ArrangeMoveLogic.js";
 
 export default {
   name: "part-container",
@@ -31,20 +32,20 @@ export default {
     partId () {
       return `tree-node-${this.container.id}`;
     },
-    isContainer: function () {
+    isContainer () {
       return this.type.match(/container/);
     },
-    classObject: function () {
+    classObject () {
       return {
         "normal-container": (this.type === "container" && !this.containsProblems),
         "problem-container": this.containsProblems,
         "no-children": !this.hasChildren
       };
     },
-    hasChildren: function () {
+    hasChildren () {
       return this.children.length > 0;
     },
-    containsProblems: function () {
+    containsProblems () {
       return this.isContainer && this.hasChildren && this.children[0].type === "document-problem";
     },
 
@@ -76,22 +77,8 @@ export default {
       this.$store.commit("SET_SELECTED_NODE", child.id);
     },
     move: function (evt) {
-      let dragged = evt.from.getAttribute("class");
-      let related = evt.to.getAttribute("class");
-
-      if (dragged === "normal-container" && related.match(/problem-container/)) {
-        return false;
-      } else if (dragged.match(/problem-container/) && related.match(/problem-container/)) {
-        return true;
-      } else if (dragged.match(/problem-container/) && related.match(/normal-container/) && related.match(/no-children/)) {
-        return true;
-      } else if (dragged.match(/normal-container/) && related.match(/normal-container/)) {
-        return true;
-      }
-      console.log(dragged);
-      console.log(dragged);
-
-      return false;
+      let moveLogic = new MoveLogic(evt);
+      return moveLogic.canMove();
     }
   }
 };
