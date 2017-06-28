@@ -13,9 +13,10 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs"
   },
   "dependencies": {
-    "vue": "^2.3.3",
+    "es6-promise": "^4.1.1",
     "lodash": "^4.17.4",
     "normalizr": "^3.2.3",
+    "vue": "^2.3.3",
     "vuedraggable": "^2.13.1",
     "vuex": "^2.3.1"
   },
