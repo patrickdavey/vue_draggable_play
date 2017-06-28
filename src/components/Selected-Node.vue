@@ -2,10 +2,9 @@
   <div>
     <img v-if="node.image" :src="node.image">
     <div v-else-if="problemContainer">
-      {{node.id}}
-      <draggable element="ul" :id="containerId" v-model="children" class="problem-container grid" :move="move" :options="{group:"people"}">
+      <draggable element="ul" :id="containerId" v-model="children" class="problem-container grid" :move="move" :options="{group:'people'}">
         <li v-for="child in children">
-          dp-{{child.id}}
+          <img :src="child.image">
         </li>
       </draggable>
     </div>

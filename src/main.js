@@ -4,10 +4,6 @@ import Vue from "vue";
 import App from "./App.vue";
 import store from "./store";
 import normalizedData from "./initial_state";
-import lodash from "lodash";
-
-Object.defineProperty(Vue.prototype, "_", { value: lodash });
-
 /* eslint-disable no-new */
 new Vue({
   store,
