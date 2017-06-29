@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import _ from "lodash";
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
@@ -17,6 +18,9 @@ const store = new Vuex.Store({
 
     SET_NODES_FOR_CONTAINER: (state, { containerID, nodes }) => {
       state.nodes[containerID].nodes = nodes;
+      _.each(nodes, function (nodeId, index) {
+        state.nodes[nodeId].order = index;
+      });
     },
 
     SET_SELECTED_NODE: (state, selectedNodeId) => {

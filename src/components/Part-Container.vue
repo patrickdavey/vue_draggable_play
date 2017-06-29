@@ -5,7 +5,7 @@
       <document-problem :problem="child"/>
     </template>
     <template v-else>
-      <i class="indicator glyphicon glyphicon-folder-open"></i>{{child.type}}-{{child.id}}
+      <i class="indicator glyphicon glyphicon-folder-open"></i>{{child.type}}-{{child.id}}-{{child.order}}
       <part-container :container="child"/>
     </template>
   </li>
@@ -58,7 +58,7 @@ export default {
         }
       },
       set (value) {
-        // value is the new list, but we just want to persist updated ids.
+        // value is the new list, but we just want to persist updated ids and update the order.
         console.log("in part-set");
         let newOrder = value.filter(function (n) { return n !== undefined; }).map(function (v) { return v.id; });
         this.$store.commit("SET_NODES_FOR_CONTAINER", {

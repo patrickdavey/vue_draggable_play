@@ -11,7 +11,7 @@ export default {
   props: ["problem"],
   computed: {
     name: function () {
-      return `${this.problem.type}-${this.problem.id}`;
+      return `${this.problem.type}-${this.problem.id}-${this.problem.order}`;
     },
     type: function () {
       return "document-problem";
