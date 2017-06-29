@@ -86,6 +86,10 @@ export default {
 </script>
 <style>
 
+ul.tree li.grid.sortable-ghost {
+  float: none !important;
+}
+
 .flip-list-move {
   transition: transform 0.5s;
 }

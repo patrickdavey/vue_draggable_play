@@ -2,8 +2,13 @@
   <div>
     <img v-if="node.image" :src="node.image">
     <div v-else-if="problemContainer">
+      <button-group v-model="layout">
+         <radio selected-value="grid">Grid</radio>
+         <radio selected-value="list">List</radio>
+      </button-group>
+
       <draggable element="ul" :id="containerId" v-model="children" class="problem-container grid" :move="move" :options="{group:'people'}">
-        <li v-for="child in children">
+        <li :class="layout" v-for="child in children">
           <img :src="child.image">
         </li>
       </draggable>
@@ -17,10 +22,17 @@
 <script>
 
 import draggable from "vuedraggable";
+import { buttonGroup, radio } from "vue-strap";
 
 export default {
   name: "selected-node",
-  components: { draggable },
+  components: { draggable, radio, buttonGroup },
+  data () {
+    return {
+      layout: "grid"
+    };
+  },
+
   computed: {
     node () {
       return this.$store.state.nodes[this.$store.state.selectedNodeId];
@@ -73,3 +85,25 @@ export default {
 };
 
 </script>
+
+<style lang="scss">
+  li.list {
+    list-style: none;
+  }
+
+  li.grid {
+    list-style: none;
+    float: left;
+    width: 174px;
+    height: 120px;
+
+    &.sortable-ghost {
+      float: left;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+</style>
