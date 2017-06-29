@@ -4,7 +4,7 @@
     <div class="fluid container">
       <div class="row">
         <div class="col-md-6">
-          <part-container :end="end" :container="rootContainer" @end="end" />
+          <part-container :end="end" parent-hierarchy="root" :container="rootContainer" @end="end" />
         </div>
         <div class="col-md-6">
           <selected-node></selected-node>

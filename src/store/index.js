@@ -25,6 +25,10 @@ const store = new Vuex.Store({
 
     SET_SELECTED_NODE: (state, selectedNodeId) => {
       state.selectedNodeId = selectedNodeId;
+    },
+
+    UPDATE_PART_PROPERTY: (state, { nodeId, property, value }) => {
+      state.nodes[nodeId][property] = value;
     }
   }
 });

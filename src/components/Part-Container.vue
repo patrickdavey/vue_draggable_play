@@ -1,14 +1,14 @@
 <template>
   <draggable element="ul" v-on:click.native.self="clickHandler" :id="partId" class="tree" v-model="children" :options="{group:'people'}" :move="move" v-bind:class="classObject">
-  <li class="branch" v-on:click.stop="childClick(child)" v-for="(child, index) in children">
-    <template v-if="containsProblems">
-      <document-problem :problem="child"/>
-    </template>
-    <template v-else>
-      <i class="indicator glyphicon glyphicon-folder-open"></i>{{child.type}}-{{child.id}}-{{child.order}}
-      <part-container :container="child"/>
-    </template>
-  </li>
+    <li class="branch" v-on:click.stop="childClick(child)" v-for="(child, index) in children">
+      <template v-if="containsProblems">
+        <document-problem :problem="child"/>
+      </template>
+      <template v-else>
+        <folder-title :part="child" v-bind:parent-hierarchy="currentHierarchy"></folder-title>
+        <part-container :container="child"/>
+      </template>
+    </li>
   </draggable>
 </template>
 
@@ -17,15 +17,27 @@
 import draggable from "vuedraggable";
 import DocumentProblem from "./Document-Problem.vue";
 import MoveLogic from "../lib/ArrangeMoveLogic.js";
+import FolderTitle from "./Folder-Title.vue";
 
 export default {
   name: "part-container",
-  props: ["container"],
-  components: {draggable, DocumentProblem},
+  props: ["container", "parentHierarchy"],
+  components: {draggable, DocumentProblem, FolderTitle},
   beforeCreate: function () {
     this.$options.components.PartContainer = require("./Part-Container.vue");
   },
   computed: {
+    currentHierarchy: function () {
+      if (this.parentHierarchy === "root") {
+        return "";
+      } else if (this.parentHierarchy) {
+        console.log(`1: ${this.parentHierarchy}`);
+        return `${this.parentHierarchy}-${this.container.order}`;
+      } else {
+        console.log(`2: ${this.parentHierarchy}`);
+        return this.container.order;
+      }
+    },
     type: function () {
       return this.container.type;
     },

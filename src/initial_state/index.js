@@ -2,29 +2,33 @@ var originalData = {
   id: 1,
   type: "container",
   order: 0,
+  name: "",
   nodes: [
     {
       id: 3,
       type: "container",
-      order: 1,
+      order: 0,
+      name: "",
       nodes: []
     },
 
     {
       id: 4,
       type: "container",
-      order: 2,
+      order: 1,
+      name: "",
       nodes: [{
         id: 11,
         type: "container",
-        order: 1,
+        order: 0,
+        name: "",
         nodes: [
 
           {
             id: 12,
             type: "document-problem",
             image: "//d241umpdvf5e0e.cloudfront.net/thumbs/19205285.png",
-            order: 1
+            order: 0
           }
         ]
       }]
@@ -33,34 +37,35 @@ var originalData = {
     {
       id: 5,
       type: "container",
-      order: 3,
+      order: 2,
+      name: "",
       nodes: [
 
         {
           id: 6,
           type: "document-problem",
           image: "//d241umpdvf5e0e.cloudfront.net/thumbs/-1199737289.png",
-          order: 1
+          order: 0
         },
         {
           id: 7,
           type: "document-problem",
           image: "//d241umpdvf5e0e.cloudfront.net/thumbs/-98607187.png",
-          order: 2
+          order: 1
         },
 
         {
           id: 8,
           type: "document-problem",
           image: "//d241umpdvf5e0e.cloudfront.net/thumbs/195293287.png",
-          order: 3
+          order: 2
         },
 
         {
           type: "document-problem",
           id: 9,
           image: "//d241umpdvf5e0e.cloudfront.net/thumbs/-212203377.png",
-          order: 4
+          order: 3
         }
       ]
     }

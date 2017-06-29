@@ -5,16 +5,22 @@
       <button-group v-model="layout">
          <radio selected-value="grid">Grid</radio>
          <radio selected-value="list">List</radio>
+         <radio selected-value="part">Part</radio>
       </button-group>
 
-      <draggable element="ul" :id="containerId" v-model="children" class="problem-container grid" :move="move" :options="{group:'people'}">
-        <li :class="layout" v-for="child in children">
-          <img :src="child.image">
-        </li>
-      </draggable>
+      <template v-if="showProblems">
+        <draggable element="ul" :id="containerId" v-model="children" class="problem-container grid" :move="move" :options="{group:'people'}">
+          <li :class="layout" v-for="child in children">
+            <img :src="child.image">
+          </li>
+        </draggable>
+      </template>
+      <template v-else>
+        <part-form :part="node"></part-form>
+      </template>
     </div>
     <div v-else>
-      <p>It"s a container <strong>id: {{node.id}}</strong> of type <strong>{{node.type}}</strong>, and we would allow the user to update directions etc</p>
+      <part-form :part="node"></part-form>
     </div>
   </div>
 </template>
@@ -23,10 +29,11 @@
 
 import draggable from "vuedraggable";
 import { buttonGroup, radio } from "vue-strap";
+import PartForm from "./Part-Form.vue";
 
 export default {
   name: "selected-node",
-  components: { draggable, radio, buttonGroup },
+  components: { draggable, radio, buttonGroup, PartForm },
   data () {
     return {
       layout: "grid"
@@ -36,6 +43,9 @@ export default {
   computed: {
     node () {
       return this.$store.state.nodes[this.$store.state.selectedNodeId];
+    },
+    showProblems () {
+      return this.layout === "grid" || this.layout === "list";
     },
     containerId () {
       return `grid-node-${this.node.id}`;
