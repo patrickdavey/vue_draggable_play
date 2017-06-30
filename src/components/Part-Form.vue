@@ -3,9 +3,13 @@
     <bs-input v-model="name"
               label="Name"
               v-bind:minlength="1"
-              required
               placeholder="Name"
-              icon
+              ></bs-input>
+
+    <bs-input v-model="directions"
+              label="Directions"
+              placeholder="Directions"
+              type="textarea"
               ></bs-input>
   </form>
 </template>
@@ -28,6 +32,19 @@ export default {
         this.$store.commit("UPDATE_PART_PROPERTY", {
           nodeId: this.part.id,
           property: "name",
+          value: value
+        });
+      }
+    },
+
+    directions: {
+      get () {
+        return this.part.directions;
+      },
+      set (value) {
+        this.$store.commit("UPDATE_PART_PROPERTY", {
+          nodeId: this.part.id,
+          property: "directions",
           value: value
         });
       }
