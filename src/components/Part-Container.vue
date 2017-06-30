@@ -5,8 +5,8 @@
         <document-problem :problem="child"/>
       </template>
       <template v-else>
-        <folder-title :part="child" v-bind:parent-hierarchy="currentHierarchy"></folder-title>
-        <part-container :container="child"/>
+        <folder-title :part="child">{{ currentHierarchy }}</folder-title>
+        <part-container :parent-hierarchy="currentHierarchy" :container="child"/>
       </template>
     </li>
   </draggable>
@@ -29,13 +29,11 @@ export default {
   computed: {
     currentHierarchy: function () {
       if (this.parentHierarchy === "root") {
-        return "";
-      } else if (this.parentHierarchy) {
-        console.log(`1: ${this.parentHierarchy}`);
-        return `${this.parentHierarchy}-${this.container.order}`;
+        return "-";
+      } else if (this.parentHierarchy === "-") {
+        return `-${this.container.order}-`;
       } else {
-        console.log(`2: ${this.parentHierarchy}`);
-        return this.container.order;
+        return `${this.parentHierarchy}${this.container.order}-`;
       }
     },
     type: function () {
