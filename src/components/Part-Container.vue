@@ -5,7 +5,7 @@
         <document-problem :problem="child"/>
       </template>
       <template v-else>
-        <folder-title :part="child">{{ currentHierarchy }}</folder-title>
+        <folder-title :part="child" :current-hierarchy="currentHierarchy"></folder-title>
         <part-container :parent-hierarchy="currentHierarchy" :container="child"/>
       </template>
     </li>
