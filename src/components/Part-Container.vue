@@ -9,6 +9,7 @@
         <part-container :parent-hierarchy="currentHierarchy" :container="child"/>
       </template>
     </li>
+    <li slot="footer" class="branch"><button @click.stop="addChild" class="btn btn-primary btn-xs">Add Part</button></li>
   </draggable>
 </template>
 
@@ -82,6 +83,9 @@ export default {
   methods: {
     clickHandler: function () {
       console.log(this.container.id);
+    },
+    addChild: function () {
+      console.log("add child");
     },
     childClick: function (child) {
       this.$store.commit("SET_SELECTED_NODE", child.id);
@@ -183,14 +187,4 @@ ul.problem-container.no-children {
     text-decoration: none;
     color:#369;
 }
-.tree li button, .tree li button:active, .tree li button:focus {
-    text-decoration: none;
-    color:#369;
-    border:none;
-    background:transparent;
-    margin:0px 0px 0px 0px;
-    padding:0px 0px 0px 0px;
-    outline: 0;
-}
-
 </style>

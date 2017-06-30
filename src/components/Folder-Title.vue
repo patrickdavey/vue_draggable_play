@@ -1,7 +1,7 @@
 
 
 <template>
-  <div>
+  <div :class="classObject">
     <i class="indicator glyphicon glyphicon-folder-open"></i>{{displayName}}
   </div>
 </template>
@@ -24,8 +24,19 @@ export default {
       } else {
         return `Part${this.currentHierarchy}${this.order}`;
       }
+    },
+    classObject () {
+      return {
+        "selected": (this.part.id === this.$store.state.selectedNodeId)
+      };
     }
   }
 };
 
 </script>
+
+<style>
+  .selected {
+    color: red;
+  }
+</style>

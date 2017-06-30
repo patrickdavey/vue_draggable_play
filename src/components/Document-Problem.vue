@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="classObject">
     {{ name }}
   </div>
 </template>
@@ -15,8 +15,19 @@ export default {
     },
     type: function () {
       return "document-problem";
+    },
+    classObject () {
+      return {
+        "selected": (this.problem.id === this.$store.state.selectedNodeId)
+      };
     }
   }
 };
 
 </script>
+
+<style>
+  .selected {
+    color: red;
+  }
+</style>
