@@ -2,7 +2,7 @@
 
 <template>
   <div :class="classObject">
-    <i class="indicator glyphicon glyphicon-folder-open"></i>{{displayName}}
+    <i class="indicator glyphicon" :class="folderStyle"></i>{{displayName}}
   </div>
 </template>
 
@@ -28,6 +28,12 @@ export default {
     classObject () {
       return {
         "selected": (this.part.id === this.$store.state.selectedNodeId)
+      };
+    },
+    folderStyle () {
+      return {
+        "glyphicon-folder-close": !this.part.open,
+        "glyphicon-folder-open": this.part.open
       };
     }
   }

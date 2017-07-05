@@ -1,6 +1,7 @@
 var originalData = {
   id: 1,
   type: "container",
+  open: true,
   directions: "",
   order: 0,
   name: "",
@@ -8,6 +9,7 @@ var originalData = {
     {
       id: 3,
       type: "container",
+      open: true,
       directions: "",
       order: 0,
       name: "",
@@ -17,12 +19,14 @@ var originalData = {
     {
       id: 4,
       type: "container",
+      open: true,
       directions: "",
       order: 1,
       name: "",
       nodes: [{
         id: 11,
         type: "container",
+        open: true,
         directions: "",
         order: 0,
         name: "",
@@ -41,6 +45,7 @@ var originalData = {
     {
       id: 5,
       type: "container",
+      open: true,
       directions: "",
       order: 2,
       name: "",

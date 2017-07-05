@@ -1,15 +1,17 @@
 <template>
-  <draggable element="ul" v-on:click.native.self="clickHandler" :id="partId" class="tree" v-model="children" :options="{group:'people'}" :move="move" v-bind:class="classObject">
-    <li class="branch" v-on:click.stop="childClick(child)" v-for="(child, index) in children">
-      <template v-if="containsProblems">
-        <document-problem :problem="child"/>
-      </template>
-      <template v-else>
-        <folder-title :part="child" :current-hierarchy="currentHierarchy"></folder-title>
-        <part-container :parent-hierarchy="currentHierarchy" :container="child"/>
-      </template>
-    </li>
-    <li slot="footer" class="branch"><button @click.stop="addChild" class="btn btn-primary btn-xs">Add Part</button></li>
+  <draggable element="ul" :click.native.self="clickHandler" :id="partId" class="tree" v-model="children" :options="{group:'people'}" :move="move" v-bind:class="classObject">
+    <template v-if="isOpen">
+      <li class="branch"  v-on:click.stop="childClick(child)" v-for="(child, index) in children">
+        <template v-if="containsProblems">
+          <document-problem :problem="child"/>
+        </template>
+        <template v-else>
+          <folder-title v-on:dblclick.native.stop="toggleOpen(child)" :part="child" :current-hierarchy="currentHierarchy"></folder-title>
+          <part-container :parent-hierarchy="currentHierarchy" :container="child"/>
+        </template>
+      </li>
+      <li slot="footer" class="branch"><button @click.stop="addChild" class="btn btn-primary btn-xs">Add Part</button></li>
+    </template>
   </draggable>
 </template>
 
@@ -24,9 +26,11 @@ export default {
   name: "part-container",
   props: ["container", "parentHierarchy"],
   components: {draggable, DocumentProblem, FolderTitle},
+
   beforeCreate: function () {
     this.$options.components.PartContainer = require("./Part-Container.vue");
   },
+
   computed: {
     currentHierarchy: function () {
       if (this.parentHierarchy === "root") {
@@ -46,10 +50,15 @@ export default {
     isContainer () {
       return this.type.match(/container/);
     },
+    isOpen () {
+      return this.container.open;
+    },
     classObject () {
       return {
         "normal-container": (this.type === "container" && !this.containsProblems),
         "problem-container": this.containsProblems,
+        "open": this.container.open,
+        "closed": !this.container.open,
         "no-children": !this.hasChildren
       };
     },
@@ -81,15 +90,26 @@ export default {
   },
 
   methods: {
+    toggleOpen: function (child) {
+      this.$store.commit("UPDATE_PART_PROPERTY", {
+        nodeId: child.id,
+        property: "open",
+        value: !child.open
+      });
+    },
+
     clickHandler: function () {
       console.log(this.container.id);
     },
+
     addChild: function () {
       console.log("add child");
     },
+
     childClick: function (child) {
       this.$store.commit("SET_SELECTED_NODE", child.id);
     },
+
     move: function (evt) {
       let moveLogic = new MoveLogic(evt);
       return moveLogic.canMove();
@@ -98,7 +118,7 @@ export default {
 };
 
 </script>
-<style>
+<style lang="scss">
 
 ul.tree li.grid.sortable-ghost {
   float: none !important;
@@ -125,6 +145,10 @@ ul.problem-container{
   min-height: 27px;
 }
 
+ul.closed {
+  display: none;
+}
+
 ul.normal-container.no-children {
   min-height: 27px;
 }
@@ -134,57 +158,57 @@ ul.problem-container.no-children {
 }
 
 .tree, .tree ul {
-    margin:0;
-    padding:0;
-    list-style:none
+  margin:0;
+  padding:0;
+  list-style:none
 }
 .tree ul {
-    margin-left:1em;
-    position:relative
+  margin-left:1em;
+  position:relative
 }
 .tree ul ul {
-    margin-left:.5em
+  margin-left:.5em
 }
 .tree ul:before {
-    content:"";
-    display:block;
-    width:0;
-    position:absolute;
-    top:0;
-    bottom:0;
-    left:0;
-    border-left:1px solid
+  content:"";
+  display:block;
+  width:0;
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  border-left:1px solid
 }
 .tree li {
-    margin:0;
-    padding:0 1em;
-    line-height:2em;
-    color:#369;
-    font-weight:700;
-    position:relative
+  margin:0;
+  padding:0 1em;
+  line-height:2em;
+  color:#369;
+  font-weight:700;
+  position:relative
 }
 .tree ul li:before {
-    content:"";
-    display:block;
-    width:10px;
-    height:0;
-    border-top:1px solid;
-    margin-top:-1px;
-    position:absolute;
-    top:1em;
-    left:0
+  content:"";
+  display:block;
+  width:10px;
+  height:0;
+  border-top:1px solid;
+  margin-top:-1px;
+  position:absolute;
+  top:1em;
+  left:0
 }
 .tree ul li:last-child:before {
-    background:#fff;
-    height:auto;
-    top:1em;
-    bottom:0
+  background:#fff;
+  height:auto;
+  top:1em;
+  bottom:0
 }
 .indicator {
-    margin-right:5px;
+  margin-right:5px;
 }
 .tree li a {
-    text-decoration: none;
-    color:#369;
+  text-decoration: none;
+  color:#369;
 }
 </style>
