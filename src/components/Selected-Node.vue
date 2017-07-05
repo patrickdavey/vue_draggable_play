@@ -9,9 +9,11 @@
       </button-group>
 
       <template v-if="showProblems">
-        <draggable element="ul" :id="containerId" v-model="children" class="problem-container grid" :move="move" :options="{group:'people'}">
+        <draggable element="ul" :id="containerId" v-model="children" class="problem-container grid clearfix" :move="move" :options="{group:'people'}">
           <li :class="layout" v-for="child in children">
-            <img :src="child.image">
+            <div class="well">
+              <img :src="child.image">
+            </div>
           </li>
         </draggable>
       </template>
@@ -28,8 +30,8 @@
 <script>
 
 import draggable from "vuedraggable";
-import { radio } from "vue-strap/src/radio";
-import { buttonGroup } from "vue-strap/src/buttonGroup";
+import radio from "vue-strap/src/radio";
+import buttonGroup from "vue-strap/src/buttonGroup";
 import PartForm from "./Part-Form.vue";
 import ProblemForm from "./Problem-Form.vue";
 
@@ -103,6 +105,24 @@ export default {
     list-style: none;
   }
 
+  ul.grid {
+    padding-left: 0px;
+    margin-top: 20px;
+
+    li {
+      margin-left: 0px;
+      margin-right: 15px;
+
+      .well {
+        height: 120px;
+      }
+
+      &.list .well {
+        height: auto;
+      }
+    }
+  }
+
   li.grid {
     list-style: none;
     float: left;
@@ -117,5 +137,6 @@ export default {
       max-width: 100%;
       height: auto;
     }
+
   }
 </style>
