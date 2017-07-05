@@ -3,16 +3,11 @@
     <h1>Arrange</h1>
     <div class="fluid container">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-3">
           <part-container :end="end" parent-hierarchy="root" :container="rootContainer" @end="end" />
         </div>
-        <div class="col-md-6">
+        <div class="col-md-9">
           <selected-node></selected-node>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <pre>{{ jsonString }}</pre>
         </div>
       </div>
     </div>

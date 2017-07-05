@@ -1,6 +1,6 @@
 <template>
   <div :class="classObject">
-    {{ name }}
+    <i class="glyphicon glyphicon-file"></i> {{ name }}
   </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
   props: ["problem"],
   computed: {
     name: function () {
-      return `${this.problem.type}-${this.problem.id}-${this.problem.order}`;
+      return `${this.problem.order}`;
     },
     type: function () {
       return "document-problem";

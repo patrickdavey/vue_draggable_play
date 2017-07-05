@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img v-if="node.image" :src="node.image">
+    <problem-form :problem="node" v-if="node.image"></problem-form>
     <div v-else-if="problemContainer">
       <button-group v-model="layout">
          <radio selected-value="grid">Grid</radio>
@@ -28,12 +28,14 @@
 <script>
 
 import draggable from "vuedraggable";
-import { buttonGroup, radio } from "vue-strap";
+import { radio } from "vue-strap/src/radio";
+import { buttonGroup } from "vue-strap/src/buttonGroup";
 import PartForm from "./Part-Form.vue";
+import ProblemForm from "./Problem-Form.vue";
 
 export default {
   name: "selected-node",
-  components: { draggable, radio, buttonGroup, PartForm },
+  components: { draggable, radio, buttonGroup, PartForm, ProblemForm },
   data () {
     return {
       layout: "grid"
