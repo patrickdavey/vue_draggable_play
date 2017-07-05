@@ -18,7 +18,7 @@
 <!-- <p>It"s a container <strong>id: {{id}}</strong> of type <strong>{{type}}</strong>, and we would allow the user to update directions etc</p> -->
 <script>
 
-import bsInput from "vue-strap";
+import {input as bsInput} from "vue-strap";
 
 export default {
   name: "part-form",
