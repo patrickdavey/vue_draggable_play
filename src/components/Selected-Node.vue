@@ -30,8 +30,7 @@
 <script>
 
 import draggable from "vuedraggable";
-import radio from "vue-strap/src/radio";
-import buttonGroup from "vue-strap/src/buttonGroup";
+import { radio, buttonGroup } from "vue-strap";
 import PartForm from "./Part-Form.vue";
 import ProblemForm from "./Problem-Form.vue";
 
