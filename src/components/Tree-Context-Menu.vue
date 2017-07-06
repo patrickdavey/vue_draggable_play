@@ -4,11 +4,13 @@
     class="lil-context-menu"
     :style="style"
     tabindex="-1"
-    @blur="close"
-    @click="close"
+    @blur.self="close"
     @contextmenu.capture.prevent>
-    <button class="btn btn-default">Create a child</button>
-    <button class="btn btn-default">Create a sibling</button>
+      <div>blah</div>
+      <div>wibblej</div>
+      <div>
+        <button class="btn btn-default">Create a child</button>
+      </div>
   </div>
 </template>
 
