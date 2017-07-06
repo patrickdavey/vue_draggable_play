@@ -6,7 +6,7 @@
           <document-problem :problem="child"/>
         </template>
         <template v-else>
-          <folder-title v-on:dblclick.native.stop="toggleOpen(child)" :part="child" :current-hierarchy="currentHierarchy"></folder-title>
+          <folder-title  @contextmenu.native.prevent="contextHandler(child, $event)" v-on:dblclick.native.stop="toggleOpen(child)" :part="child" :current-hierarchy="currentHierarchy"></folder-title>
           <part-container :parent-hierarchy="currentHierarchy" :container="child"/>
         </template>
       </li>
@@ -95,6 +95,20 @@ export default {
         nodeId: child.id,
         property: "open",
         value: !child.open
+      });
+    },
+
+    contextHandler: function (child, evt) {
+      console.log(`pageX: ${evt.pageX}, pageY: ${evt.pageY}`);
+      const scrollingElement = document.scrollingElement || document.documentElement;
+
+      let ctxLeft = evt.pageX;
+      let ctxTop = evt.pageY - scrollingElement.scrollTop;
+
+      this.$store.commit("SET_CONTEXT_ACTIVE", {
+        nodeId: child.id,
+        x: ctxLeft,
+        y: ctxTop
       });
     },
 

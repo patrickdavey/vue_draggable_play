@@ -3,7 +3,7 @@
     <h1>Arrange</h1>
     <div class="fluid container">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 tree-container">
           <part-container :end="end" parent-hierarchy="root" :container="rootContainer" @end="end" />
         </div>
         <div class="col-md-9">
@@ -42,3 +42,11 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+  .options {
+    width: 250px;
+    border: 1px black solid;
+  }
+
+</style>
