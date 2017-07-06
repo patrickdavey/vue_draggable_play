@@ -2,19 +2,16 @@
   <div id="app">
     <h1 class="text-center">Draggable Demo</h1>
     <arrange></arrange>
-    <tree-context-menu></tree-context-menu>
   </div>
 </template>
 
 <script>
 import Arrange from "./components/Arrange.vue";
-import TreeContextMenu from "./components/Tree-Context-Menu.vue";
 
 export default {
   name: "app",
   components: {
-    Arrange,
-    TreeContextMenu
+    Arrange
   }
 };
 </script>

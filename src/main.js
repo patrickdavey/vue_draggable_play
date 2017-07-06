@@ -3,6 +3,7 @@
 import "es6-promise/auto";
 import Vue from "vue";
 import App from "./App.vue";
+import TreeContextMenu from "./components/Tree-Context-Menu.vue";
 import store from "./store";
 import normalizedData from "./initial_state";
 /* eslint-disable no-new */
@@ -14,4 +15,11 @@ new Vue({
   created () {
     store.commit("SET_INITIAL_DATA", { initNodes: normalizedData.entities.nodes, rootId: normalizedData.result });
   }
+});
+
+new Vue({
+  store,
+  el: "#vue-context-menu",
+  template: "<tree-context-menu/>",
+  components: { TreeContextMenu }
 });
